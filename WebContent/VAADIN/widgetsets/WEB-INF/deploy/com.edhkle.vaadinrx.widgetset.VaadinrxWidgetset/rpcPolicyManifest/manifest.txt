@@ -1,0 +1,2 @@
+# Module com.edhkle.vaadinrx.widgetset.VaadinrxWidgetset
+# RPC service class, partial path of RPC policy file
