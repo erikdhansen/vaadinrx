@@ -1,0 +1,29 @@
+#!/bin/bash
+
+ANT=/usr/local/ant/bin/ant
+
+case "$1" in
+	clean)
+		$ANT clean
+		;;
+	build)
+		$ANT dist
+		;;
+	deploy)
+		cp dist/VaadinRx.war /usr/local/tomcat/webapps
+		echo "VaadinRx deployed to Tomcat"
+		;;
+	undeploy)
+		rm /usr/local/tomcat/webapps/VaadinRx.war
+		echo "VaadinRx removed from Tomcat"
+		;;
+	deps-all)
+		cd ../PocketRx && $ANT clean jar && cd ../VaadinRx && $0 all
+		;;
+	all)
+		echo "Undeploying VaadinRx WAR, cleaning, building and redeploying..."
+		$0 undeploy; $0 clean && $0 build && $0 deploy
+		;;
+esac
+
+exit 0
